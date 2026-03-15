@@ -1,0 +1,281 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <unordered_map>
+#include <bitset>
+using namespace std;
+
+// Parser class, reads file, classifies commands, handles C commands
+class Parser {
+private:
+    ifstream file;
+    string currentLine;
+
+public:
+    Parser(const string& filename) {
+        file.open(filename);
+        if (!file.is_open()) {
+            cerr << "Error opening file\n";
+        }
+    }
+
+    bool hasMoreCommands() {
+        return static_cast<bool>(getline(file, currentLine));
+    }
+
+    void advance() {
+        while (hasMoreCommands()) {
+            cleanLine(currentLine);
+            if (!currentLine.empty()) {
+                break;
+            }
+        }
+    }
+
+    string commandType() {
+        if (currentLine[0] == '@') return "A_COMMAND";
+        if (currentLine[0] == '(') return "L_COMMAND";
+        else return "C_COMMAND";
+    }
+
+    string symbol(string command) {
+        if (command == "A_COMMAND") {
+            return currentLine.substr(1);
+        }
+        if (command == "L_COMMAND") {
+            return currentLine.substr(1, currentLine.length() - 2);
+        }
+        return "";
+    }
+
+    string destination() {
+        size_t equalPos = currentLine.find("=");
+        if (equalPos != string::npos) {
+            return currentLine.substr(0, equalPos);
+        }
+        return "";
+    }
+
+    string computation() {
+        size_t equalPos = currentLine.find("=");
+        size_t semicolonPos = currentLine.find(";");
+
+        if (equalPos != string::npos) {
+            return currentLine.substr(equalPos + 1, semicolonPos - equalPos - 1);
+        } else if (semicolonPos != string::npos) {
+            return currentLine.substr(0, semicolonPos);
+        }
+        return "";
+    }
+
+    string jump() {
+        size_t semicolonPos = currentLine.find(";");
+        if (semicolonPos != string::npos) {
+            return currentLine.substr(semicolonPos + 1);
+        }
+        return "";
+    }
+
+private:
+    void cleanLine(string& line) {
+        // Remove comments and extra whitespace
+        size_t commentPos = line.find("//");
+        if (commentPos != string::npos) {
+            line = line.substr(0, commentPos);
+        }
+        line.erase(0, line.find_first_not_of(" \t"));  // Trim leading whitespace
+    }
+};
+
+class Code {
+private:
+    string dest;
+    string comp;
+    string jump;
+
+    static const unordered_map<string, string> destDict;
+    static const unordered_map<string, string> compDict;
+    static const unordered_map<string, string> jumpDict;
+
+public:
+    Code(const string& dest, const string& comp, const string& jump)
+        : dest(dest), comp(comp), jump(jump) {}
+
+    string toBinary() {
+        string binary = "111";
+        binary += compDict.at(comp);
+        binary += destDict.at(dest);
+        binary += jumpDict.at(jump);
+
+        return binary;
+    }
+};
+
+// **Define static constants outside the class**
+const unordered_map<string, string> Code::destDict = {
+    {"", "000"},
+    {"M", "001"},
+    {"D", "010"},
+    {"MD", "011"},
+    {"A", "100"},
+    {"AM", "101"},
+    {"AD", "110"},
+    {"AMD", "111"}
+};
+
+const unordered_map<string, string> Code::compDict = {
+    {"0", "0101010"},
+    {"1", "0111111"},
+    {"-1", "0111010"},
+    {"D", "0001100"},
+    {"A", "0110000"},
+    {"M", "1110000"},
+    {"!D", "0001101"},
+    {"!A", "0110001"},
+    {"!M", "1110001"},
+    {"-D", "0001111"},
+    {"-A", "0110011"},
+    {"-M", "1110011"},
+    {"D+1", "0011111"},
+    {"A+1", "0110111"},
+    {"M+1", "1110111"},
+    {"D-1", "0001110"},
+    {"A-1", "0110010"},
+    {"M-1", "1110010"},
+    {"D+A", "0000010"},
+    {"D+M", "1000010"},
+    {"D-A", "0010011"},
+    {"D-M", "1010011"},
+    {"A-D", "0000111"},
+    {"M-D", "1000111"},
+    {"D&A", "0000000"},
+    {"D&M", "1000000"},
+    {"D|A", "0010101"},
+    {"D|M", "1010101"}
+};
+
+const unordered_map<string, string> Code::jumpDict = {
+    {"", "000"},   // No jump
+    {"JGT", "001"},
+    {"JEQ", "010"},
+    {"JGE", "011"},
+    {"JLT", "100"},
+    {"JNE", "101"},
+    {"JLE", "110"},
+    {"JMP", "111"}
+};
+
+unordered_map<string, int> createPredefinedSymbols() {
+    unordered_map<string, int> predefinedSymbols;
+
+    // Initialize R0 to R15 (addresses 0 to 15 in decimal)
+    for (int i = 0; i <= 15; ++i) {
+        predefinedSymbols["R" + to_string(i)] = i;
+    }
+
+    // Initialize predefined symbols (SP, LCL, ARG, THIS, THAT, SCREEN, KBD)
+    predefinedSymbols["SP"] = 0;    // Address 0
+    predefinedSymbols["LCL"] = 1;   // Address 1
+    predefinedSymbols["ARG"] = 2;   // Address 2
+    predefinedSymbols["THIS"] = 3;  // Address 3
+    predefinedSymbols["THAT"] = 4;  // Address 4
+    predefinedSymbols["SCREEN"] = 16384;  // Address 16384 (decimal)
+    predefinedSymbols["KBD"] = 24576;     // Address 24576 (decimal)
+
+    return predefinedSymbols;
+}
+
+class SymbolTable {
+private:
+    unordered_map<string, int> table;
+
+public:
+    SymbolTable(const unordered_map<string, int>& predefinedSymbols) {
+        for (const auto& symbol : predefinedSymbols) {
+            table[symbol.first] = symbol.second;
+        }
+    }
+
+    void addEntry(const string& symbol, int address) {
+        table[symbol] = address;
+    }
+
+    bool contains(const string& symbol) {
+        return table.find(symbol) != table.end();
+    }
+
+    int getAddress(const string& symbol) {
+        if (contains(symbol)) {
+            return table[symbol];
+        }
+        return -1;  // Return -1 if the symbol doesn't exist
+    }
+};
+
+int main(int argc, char* argv[]) {
+    // Check if input file is provided as argument
+    if (argc < 2) {
+        cerr << "Usage: HackAssembler <input_file>" << endl;
+        return 1;
+    }
+
+    // Extract input file name from command-line argument
+    string inputFile = argv[1];
+    string outputFile = inputFile.substr(0, inputFile.find_last_of(".")) + ".hack";  // Default output file
+
+    // Initialize the predefined symbol table
+    unordered_map<string, int> predefinedSymbols = createPredefinedSymbols();
+    SymbolTable symbolTable(predefinedSymbols);
+
+    // Create a parser for the Hack assembly file
+    Parser parser(inputFile);
+
+    // Pass 1: Collect labels
+    int currentAddress = 16; // Start from address 16 for variables
+    while (parser.hasMoreCommands()) {
+        parser.advance();
+        if (parser.commandType() == "L_COMMAND") {
+            string label = parser.symbol("L_COMMAND");
+            symbolTable.addEntry(label, currentAddress);
+        } else {
+            ++currentAddress;  // Increment address for A or C command
+        }
+    }
+
+    // Pass 2: Handle A and C commands
+    parser = Parser(inputFile);  // Reinitialize parser for second pass
+    ofstream outFile(outputFile);
+    while (parser.hasMoreCommands()) {
+        parser.advance();
+        if (parser.commandType() == "A_COMMAND") {
+            string symbol = parser.symbol("A_COMMAND");
+            int address;
+
+            // Check if it's a number or symbol
+            if (isdigit(symbol[0])) {
+                address = stoi(symbol);  // Convert to int if it's a number
+            } else {
+                // Look up or add symbol to the table
+                if (!symbolTable.contains(symbol)) {
+                    symbolTable.addEntry(symbol, currentAddress++);
+                }
+                address = symbolTable.getAddress(symbol);
+            }
+
+            // Convert the address to a 16-bit binary string
+            bitset<16> binaryAddress(address);
+            outFile << binaryAddress.to_string() << endl;
+        } else if (parser.commandType() == "C_COMMAND") {
+            // Process C command: Convert to binary
+            string dest = parser.destination();
+            string comp = parser.computation();
+            string jump = parser.jump();
+            Code code(dest, comp, jump);
+            outFile << code.toBinary() << endl;
+        }
+    }
+
+    outFile.close(); // Close the output file when done
+    return 0;
+}
+
