@@ -1,0 +1,2211 @@
+function Tetromino.new 0
+    push constant 6
+    call Memory.alloc 1
+    pop pointer 0
+    push constant 10
+    pop this 2
+    push constant 10
+    pop this 3
+    push argument 0
+    pop this 0
+    push argument 1
+    pop this 1
+    push constant 16
+    call Array.new 1
+    pop this 5
+    push argument 2
+    pop this 4
+    push this 4
+    push constant 0
+    eq
+    not
+    if-goto Tetromino_1
+    push constant 0
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 1
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 2
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 3
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 4
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 5
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 6
+    push this 5
+    add
+    push constant 1
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 7
+    push this 5
+    add
+    push constant 1
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 8
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 9
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 10
+    push this 5
+    add
+    push constant 1
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 11
+    push this 5
+    add
+    push constant 1
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 12
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 13
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 14
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 15
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    goto Tetromino_0
+label Tetromino_1
+label Tetromino_0
+    push this 4
+    push constant 1
+    eq
+    not
+    if-goto Tetromino_3
+    push constant 0
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 1
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 2
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 3
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 4
+    push this 5
+    add
+    push constant 1
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 5
+    push this 5
+    add
+    push constant 1
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 6
+    push this 5
+    add
+    push constant 1
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 7
+    push this 5
+    add
+    push constant 1
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 8
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 9
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 10
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 11
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 12
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 13
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 14
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 15
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    goto Tetromino_2
+label Tetromino_3
+label Tetromino_2
+    push this 4
+    push constant 2
+    eq
+    not
+    if-goto Tetromino_5
+    push constant 0
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 1
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 2
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 3
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 4
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 5
+    push this 5
+    add
+    push constant 1
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 6
+    push this 5
+    add
+    push constant 1
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 7
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 8
+    push this 5
+    add
+    push constant 1
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 9
+    push this 5
+    add
+    push constant 1
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 10
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 11
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 12
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 13
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 14
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 15
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    goto Tetromino_4
+label Tetromino_5
+label Tetromino_4
+    push this 4
+    push constant 3
+    eq
+    not
+    if-goto Tetromino_7
+    push constant 0
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 1
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 2
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 3
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 4
+    push this 5
+    add
+    push constant 1
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 5
+    push this 5
+    add
+    push constant 1
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 6
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 7
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 8
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 9
+    push this 5
+    add
+    push constant 1
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 10
+    push this 5
+    add
+    push constant 1
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 11
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 12
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 13
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 14
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 15
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    goto Tetromino_6
+label Tetromino_7
+label Tetromino_6
+    push this 4
+    push constant 4
+    eq
+    not
+    if-goto Tetromino_9
+    push constant 0
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 1
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 2
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 3
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 4
+    push this 5
+    add
+    push constant 1
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 5
+    push this 5
+    add
+    push constant 1
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 6
+    push this 5
+    add
+    push constant 1
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 7
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 8
+    push this 5
+    add
+    push constant 1
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 9
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 10
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 11
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 12
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 13
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 14
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 15
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    goto Tetromino_8
+label Tetromino_9
+label Tetromino_8
+    push this 4
+    push constant 5
+    eq
+    not
+    if-goto Tetromino_11
+    push constant 0
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 1
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 2
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 3
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 4
+    push this 5
+    add
+    push constant 1
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 5
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 6
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 7
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 8
+    push this 5
+    add
+    push constant 1
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 9
+    push this 5
+    add
+    push constant 1
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 10
+    push this 5
+    add
+    push constant 1
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 11
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 12
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 13
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 14
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 15
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    goto Tetromino_10
+label Tetromino_11
+label Tetromino_10
+    push this 4
+    push constant 6
+    eq
+    not
+    if-goto Tetromino_13
+    push constant 0
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 1
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 2
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 3
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 4
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 5
+    push this 5
+    add
+    push constant 1
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 6
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 7
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 8
+    push this 5
+    add
+    push constant 1
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 9
+    push this 5
+    add
+    push constant 1
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 10
+    push this 5
+    add
+    push constant 1
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 11
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 12
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 13
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 14
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 15
+    push this 5
+    add
+    push constant 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    goto Tetromino_12
+label Tetromino_13
+label Tetromino_12
+    push pointer 0
+    return
+function Tetromino.getX 0
+    push argument 0
+    pop pointer 0
+    push this 0
+    return
+function Tetromino.getY 0
+    push argument 0
+    pop pointer 0
+    push this 1
+    return
+function Tetromino.getGrid 0
+    push argument 0
+    pop pointer 0
+    push this 5
+    return
+function Tetromino.dispose 0
+    push argument 0
+    pop pointer 0
+    push pointer 0
+    call Memory.deAlloc 1
+    pop temp 0
+    push constant 0
+    return
+function Tetromino.draw 7
+    push argument 0
+    pop pointer 0
+    push constant 0
+    pop local 0
+label Tetromino_14
+    push local 0
+    push constant 16
+    lt
+    not
+    if-goto Tetromino_15
+    push local 0
+    push this 5
+    add
+    pop pointer 1
+    push that 0
+    push constant 1
+    eq
+    not
+    if-goto Tetromino_17
+    push local 0
+    push constant 0
+    eq
+    not
+    if-goto Tetromino_19
+    push this 0
+    push constant 0
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 3
+    push this 1
+    push constant 0
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 4
+    goto Tetromino_18
+label Tetromino_19
+label Tetromino_18
+    push local 0
+    push constant 1
+    eq
+    not
+    if-goto Tetromino_21
+    push this 0
+    push constant 1
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 3
+    push this 1
+    push constant 0
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 4
+    goto Tetromino_20
+label Tetromino_21
+label Tetromino_20
+    push local 0
+    push constant 2
+    eq
+    not
+    if-goto Tetromino_23
+    push this 0
+    push constant 2
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 3
+    push this 1
+    push constant 0
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 4
+    goto Tetromino_22
+label Tetromino_23
+label Tetromino_22
+    push local 0
+    push constant 3
+    eq
+    not
+    if-goto Tetromino_25
+    push this 0
+    push constant 3
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 3
+    push this 1
+    push constant 0
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 4
+    goto Tetromino_24
+label Tetromino_25
+label Tetromino_24
+    push local 0
+    push constant 4
+    eq
+    not
+    if-goto Tetromino_27
+    push this 0
+    push constant 0
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 3
+    push this 1
+    push constant 1
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 4
+    goto Tetromino_26
+label Tetromino_27
+label Tetromino_26
+    push local 0
+    push constant 5
+    eq
+    not
+    if-goto Tetromino_29
+    push this 0
+    push constant 1
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 3
+    push this 1
+    push constant 1
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 4
+    goto Tetromino_28
+label Tetromino_29
+label Tetromino_28
+    push local 0
+    push constant 6
+    eq
+    not
+    if-goto Tetromino_31
+    push this 0
+    push constant 2
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 3
+    push this 1
+    push constant 1
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 4
+    goto Tetromino_30
+label Tetromino_31
+label Tetromino_30
+    push local 0
+    push constant 7
+    eq
+    not
+    if-goto Tetromino_33
+    push this 0
+    push constant 3
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 3
+    push this 1
+    push constant 1
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 4
+    goto Tetromino_32
+label Tetromino_33
+label Tetromino_32
+    push local 0
+    push constant 8
+    eq
+    not
+    if-goto Tetromino_35
+    push this 0
+    push constant 0
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 3
+    push this 1
+    push constant 2
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 4
+    goto Tetromino_34
+label Tetromino_35
+label Tetromino_34
+    push local 0
+    push constant 9
+    eq
+    not
+    if-goto Tetromino_37
+    push this 0
+    push constant 1
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 3
+    push this 1
+    push constant 2
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 4
+    goto Tetromino_36
+label Tetromino_37
+label Tetromino_36
+    push local 0
+    push constant 10
+    eq
+    not
+    if-goto Tetromino_39
+    push this 0
+    push constant 2
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 3
+    push this 1
+    push constant 2
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 4
+    goto Tetromino_38
+label Tetromino_39
+label Tetromino_38
+    push local 0
+    push constant 11
+    eq
+    not
+    if-goto Tetromino_41
+    push this 0
+    push constant 3
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 3
+    push this 1
+    push constant 2
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 4
+    goto Tetromino_40
+label Tetromino_41
+label Tetromino_40
+    push local 0
+    push constant 12
+    eq
+    not
+    if-goto Tetromino_43
+    push this 0
+    push constant 0
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 3
+    push this 1
+    push constant 3
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 4
+    goto Tetromino_42
+label Tetromino_43
+label Tetromino_42
+    push local 0
+    push constant 13
+    eq
+    not
+    if-goto Tetromino_45
+    push this 0
+    push constant 1
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 3
+    push this 1
+    push constant 3
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 4
+    goto Tetromino_44
+label Tetromino_45
+label Tetromino_44
+    push local 0
+    push constant 14
+    eq
+    not
+    if-goto Tetromino_47
+    push this 0
+    push constant 2
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 3
+    push this 1
+    push constant 3
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 4
+    goto Tetromino_46
+label Tetromino_47
+label Tetromino_46
+    push local 0
+    push constant 15
+    eq
+    not
+    if-goto Tetromino_49
+    push this 0
+    push constant 3
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 3
+    push this 1
+    push constant 3
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 4
+    goto Tetromino_48
+label Tetromino_49
+label Tetromino_48
+    push local 3
+    push constant 11
+    add
+    pop local 5
+    push local 4
+    push constant 11
+    add
+    pop local 6
+    push constant 1
+    neg
+    call Screen.setColor 1
+    pop temp 0
+    push local 3
+    push local 4
+    push local 5
+    push local 6
+    call Screen.drawRectangle 4
+    pop temp 0
+    goto Tetromino_16
+label Tetromino_17
+label Tetromino_16
+    push local 0
+    push constant 1
+    add
+    pop local 0
+    goto Tetromino_14
+label Tetromino_15
+    push constant 0
+    return
+function Tetromino.erase 7
+    push argument 0
+    pop pointer 0
+    push constant 0
+    pop local 0
+label Tetromino_50
+    push local 0
+    push constant 16
+    lt
+    not
+    if-goto Tetromino_51
+    push local 0
+    push this 5
+    add
+    pop pointer 1
+    push that 0
+    push constant 1
+    eq
+    not
+    if-goto Tetromino_53
+    push local 0
+    push constant 0
+    eq
+    not
+    if-goto Tetromino_55
+    push this 0
+    push constant 0
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 3
+    push this 1
+    push constant 0
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 4
+    goto Tetromino_54
+label Tetromino_55
+label Tetromino_54
+    push local 0
+    push constant 1
+    eq
+    not
+    if-goto Tetromino_57
+    push this 0
+    push constant 1
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 3
+    push this 1
+    push constant 0
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 4
+    goto Tetromino_56
+label Tetromino_57
+label Tetromino_56
+    push local 0
+    push constant 2
+    eq
+    not
+    if-goto Tetromino_59
+    push this 0
+    push constant 2
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 3
+    push this 1
+    push constant 0
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 4
+    goto Tetromino_58
+label Tetromino_59
+label Tetromino_58
+    push local 0
+    push constant 3
+    eq
+    not
+    if-goto Tetromino_61
+    push this 0
+    push constant 3
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 3
+    push this 1
+    push constant 0
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 4
+    goto Tetromino_60
+label Tetromino_61
+label Tetromino_60
+    push local 0
+    push constant 4
+    eq
+    not
+    if-goto Tetromino_63
+    push this 0
+    push constant 0
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 3
+    push this 1
+    push constant 1
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 4
+    goto Tetromino_62
+label Tetromino_63
+label Tetromino_62
+    push local 0
+    push constant 5
+    eq
+    not
+    if-goto Tetromino_65
+    push this 0
+    push constant 1
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 3
+    push this 1
+    push constant 1
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 4
+    goto Tetromino_64
+label Tetromino_65
+label Tetromino_64
+    push local 0
+    push constant 6
+    eq
+    not
+    if-goto Tetromino_67
+    push this 0
+    push constant 2
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 3
+    push this 1
+    push constant 1
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 4
+    goto Tetromino_66
+label Tetromino_67
+label Tetromino_66
+    push local 0
+    push constant 7
+    eq
+    not
+    if-goto Tetromino_69
+    push this 0
+    push constant 3
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 3
+    push this 1
+    push constant 1
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 4
+    goto Tetromino_68
+label Tetromino_69
+label Tetromino_68
+    push local 0
+    push constant 8
+    eq
+    not
+    if-goto Tetromino_71
+    push this 0
+    push constant 0
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 3
+    push this 1
+    push constant 2
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 4
+    goto Tetromino_70
+label Tetromino_71
+label Tetromino_70
+    push local 0
+    push constant 9
+    eq
+    not
+    if-goto Tetromino_73
+    push this 0
+    push constant 1
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 3
+    push this 1
+    push constant 2
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 4
+    goto Tetromino_72
+label Tetromino_73
+label Tetromino_72
+    push local 0
+    push constant 10
+    eq
+    not
+    if-goto Tetromino_75
+    push this 0
+    push constant 2
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 3
+    push this 1
+    push constant 2
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 4
+    goto Tetromino_74
+label Tetromino_75
+label Tetromino_74
+    push local 0
+    push constant 11
+    eq
+    not
+    if-goto Tetromino_77
+    push this 0
+    push constant 3
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 3
+    push this 1
+    push constant 2
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 4
+    goto Tetromino_76
+label Tetromino_77
+label Tetromino_76
+    push local 0
+    push constant 12
+    eq
+    not
+    if-goto Tetromino_79
+    push this 0
+    push constant 0
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 3
+    push this 1
+    push constant 3
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 4
+    goto Tetromino_78
+label Tetromino_79
+label Tetromino_78
+    push local 0
+    push constant 13
+    eq
+    not
+    if-goto Tetromino_81
+    push this 0
+    push constant 1
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 3
+    push this 1
+    push constant 3
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 4
+    goto Tetromino_80
+label Tetromino_81
+label Tetromino_80
+    push local 0
+    push constant 14
+    eq
+    not
+    if-goto Tetromino_83
+    push this 0
+    push constant 2
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 3
+    push this 1
+    push constant 3
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 4
+    goto Tetromino_82
+label Tetromino_83
+label Tetromino_82
+    push local 0
+    push constant 15
+    eq
+    not
+    if-goto Tetromino_85
+    push this 0
+    push constant 3
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 3
+    push this 1
+    push constant 3
+    push constant 12
+    call Math.multiply 2
+    add
+    pop local 4
+    goto Tetromino_84
+label Tetromino_85
+label Tetromino_84
+    push local 3
+    push constant 11
+    add
+    pop local 5
+    push local 4
+    push constant 11
+    add
+    pop local 6
+    push constant 0
+    call Screen.setColor 1
+    pop temp 0
+    push local 3
+    push local 4
+    push local 5
+    push local 6
+    call Screen.drawRectangle 4
+    pop temp 0
+    goto Tetromino_52
+label Tetromino_53
+label Tetromino_52
+    push local 0
+    push constant 1
+    add
+    pop local 0
+    goto Tetromino_50
+label Tetromino_51
+    push constant 0
+    return
+function Tetromino.moveLeft 0
+    push argument 0
+    pop pointer 0
+    push pointer 0
+    call Tetromino.erase 1
+    pop temp 0
+    push this 0
+    push constant 12
+    sub
+    pop this 0
+    push pointer 0
+    call Tetromino.draw 1
+    pop temp 0
+    push constant 0
+    return
+function Tetromino.moveRight 0
+    push argument 0
+    pop pointer 0
+    push pointer 0
+    call Tetromino.erase 1
+    pop temp 0
+    push this 0
+    push constant 12
+    add
+    pop this 0
+    push pointer 0
+    call Tetromino.draw 1
+    pop temp 0
+    push constant 0
+    return
+function Tetromino.rotate 8
+    push argument 0
+    pop pointer 0
+    push pointer 0
+    call Tetromino.erase 1
+    pop temp 0
+    push constant 0
+    push this 5
+    add
+    pop pointer 1
+    push that 0
+    pop local 0
+    push constant 1
+    push this 5
+    add
+    pop pointer 1
+    push that 0
+    pop local 1
+    push constant 2
+    push this 5
+    add
+    pop pointer 1
+    push that 0
+    pop local 2
+    push constant 3
+    push this 5
+    add
+    pop pointer 1
+    push that 0
+    pop local 3
+    push constant 5
+    push this 5
+    add
+    pop pointer 1
+    push that 0
+    pop local 4
+    push constant 6
+    push this 5
+    add
+    pop pointer 1
+    push that 0
+    pop local 5
+    push constant 7
+    push this 5
+    add
+    pop pointer 1
+    push that 0
+    pop local 6
+    push constant 11
+    push this 5
+    add
+    pop pointer 1
+    push that 0
+    pop local 7
+    push constant 0
+    push this 5
+    add
+    push constant 12
+    push this 5
+    add
+    pop pointer 1
+    push that 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 1
+    push this 5
+    add
+    push constant 8
+    push this 5
+    add
+    pop pointer 1
+    push that 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 2
+    push this 5
+    add
+    push constant 4
+    push this 5
+    add
+    pop pointer 1
+    push that 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 3
+    push this 5
+    add
+    push local 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 4
+    push this 5
+    add
+    push constant 13
+    push this 5
+    add
+    pop pointer 1
+    push that 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 5
+    push this 5
+    add
+    push constant 9
+    push this 5
+    add
+    pop pointer 1
+    push that 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 6
+    push this 5
+    add
+    push local 4
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 7
+    push this 5
+    add
+    push local 1
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 8
+    push this 5
+    add
+    push constant 14
+    push this 5
+    add
+    pop pointer 1
+    push that 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 9
+    push this 5
+    add
+    push constant 10
+    push this 5
+    add
+    pop pointer 1
+    push that 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 10
+    push this 5
+    add
+    push local 5
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 11
+    push this 5
+    add
+    push local 2
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 12
+    push this 5
+    add
+    push constant 15
+    push this 5
+    add
+    pop pointer 1
+    push that 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 13
+    push this 5
+    add
+    push local 7
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 14
+    push this 5
+    add
+    push local 6
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 15
+    push this 5
+    add
+    push local 3
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push pointer 0
+    call Tetromino.draw 1
+    pop temp 0
+    push constant 0
+    return
+function Tetromino.getRotatedGrid 9
+    push argument 0
+    pop pointer 0
+    push constant 16
+    call Array.new 1
+    pop local 0
+    push constant 0
+    push this 5
+    add
+    pop pointer 1
+    push that 0
+    pop local 1
+    push constant 1
+    push this 5
+    add
+    pop pointer 1
+    push that 0
+    pop local 2
+    push constant 2
+    push this 5
+    add
+    pop pointer 1
+    push that 0
+    pop local 3
+    push constant 3
+    push this 5
+    add
+    pop pointer 1
+    push that 0
+    pop local 4
+    push constant 5
+    push this 5
+    add
+    pop pointer 1
+    push that 0
+    pop local 5
+    push constant 6
+    push this 5
+    add
+    pop pointer 1
+    push that 0
+    pop local 6
+    push constant 7
+    push this 5
+    add
+    pop pointer 1
+    push that 0
+    pop local 7
+    push constant 11
+    push this 5
+    add
+    pop pointer 1
+    push that 0
+    pop local 8
+    push constant 0
+    push local 0
+    add
+    push constant 12
+    push this 5
+    add
+    pop pointer 1
+    push that 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 1
+    push local 0
+    add
+    push constant 8
+    push this 5
+    add
+    pop pointer 1
+    push that 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 2
+    push local 0
+    add
+    push constant 4
+    push this 5
+    add
+    pop pointer 1
+    push that 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 3
+    push local 0
+    add
+    push local 1
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 4
+    push local 0
+    add
+    push constant 13
+    push this 5
+    add
+    pop pointer 1
+    push that 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 5
+    push local 0
+    add
+    push constant 9
+    push this 5
+    add
+    pop pointer 1
+    push that 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 6
+    push local 0
+    add
+    push local 5
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 7
+    push local 0
+    add
+    push local 2
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 8
+    push local 0
+    add
+    push constant 14
+    push this 5
+    add
+    pop pointer 1
+    push that 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 9
+    push local 0
+    add
+    push constant 10
+    push this 5
+    add
+    pop pointer 1
+    push that 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 10
+    push local 0
+    add
+    push local 6
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 11
+    push local 0
+    add
+    push local 3
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 12
+    push local 0
+    add
+    push constant 15
+    push this 5
+    add
+    pop pointer 1
+    push that 0
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 13
+    push local 0
+    add
+    push local 8
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 14
+    push local 0
+    add
+    push local 7
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 15
+    push local 0
+    add
+    push local 4
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push local 0
+    return
+function Tetromino.moveDown 0
+    push argument 0
+    pop pointer 0
+    push pointer 0
+    call Tetromino.erase 1
+    pop temp 0
+    push this 1
+    push constant 12
+    add
+    pop this 1
+    push pointer 0
+    call Tetromino.draw 1
+    pop temp 0
+    push constant 0
+    return

@@ -1,0 +1,417 @@
+// Tetris game
+class Tetris {
+	// Variables: (wx, wy) window's position in the screen, grid array with the static state of the game and the score
+	field int wx, wy, score, direction, maxh, seed, nextType;
+	field Array windowGrid;
+	field Tetromino tetromino;
+
+	// Consturctor Creates a window, initializes the array and set inital score to 0
+	constructor Tetris new(int x, int y) {
+		var int i;
+		let wx = x;
+		let wy = y;
+		let score = 0;
+		let direction = 0;
+		let maxh = 0;
+		let windowGrid = Array.new(200);
+		let i = 0;
+		while (i < 200) {
+    			let windowGrid[i] = 0;
+    			let i = i + 1;
+		}
+		do drawStatic();
+		let nextType = Random.randRange(6);
+		return this;
+	}
+
+	// Dispose Dispose the current game
+        method void dispose() {
+                do Memory.deAlloc(this);
+                return;
+        }
+	method int mod(int a, int b) {
+		var int q, rem;
+    		let q = a / b;
+		let rem = a - (q * b);
+		return rem;
+	}
+
+	// Check for a left side collison, returns 1 if there is a collision, 0 otherwise
+	method boolean leftCollision() {
+		var int gridX, gridY, prevColumn; // tetromino position relative to the window not the sceen
+		var int row, col, i;
+		var Array grid;
+		// Get the position in the grid of the first column of the tetromino grid
+		let gridX = (tetromino.getX() - wx) / 12;
+		let gridY = (tetromino.getY() - wy) / 12;
+		let grid = tetromino.getGrid();
+		// Check left collision
+		let i = 0;
+		while (i < 16) {
+			if (grid[i] = 1) {
+				let row = gridY + (i / 4);
+				let col = gridX + mod(i, 4);
+				let prevColumn = col - 1;
+				// Out of bounds case
+				if (prevColumn < 0) {
+					return true;
+				}
+				// Collision with another tetromino case
+				if (windowGrid[row * 10 + prevColumn] = 1) {
+					return true;
+				}
+			}
+	    		let i = i + 1;
+		}
+		return false; // if it passes the while loop there is no collision
+	}
+
+        // Check for a right side collison, returns 1 if there is a collision, 0 otherwise
+        method boolean rightCollision() {
+                var int gridX, gridY; // tetromino position relative to the window not the sceen
+                var int row, col, i, nextColumn;
+		var Array grid;
+                // Get the position in the grid of the first column of the tetromino grid
+                let gridX = (tetromino.getX() - wx) / 12;
+                let gridY = (tetromino.getY() - wy) / 12;
+		let grid = tetromino.getGrid();
+
+                let i = 0;
+            	while (i < 16) {
+			if (grid[i] = 1) {
+				let row = gridY + (i / 4);
+				let col = gridX + mod(i, 4);
+				let nextColumn = col + 1;
+				if (nextColumn > 9) {
+					return true;
+				}
+				if (windowGrid[row * 10 + nextColumn] = 1) {
+					return true;
+				}
+		
+			}
+                	let i = i + 1;
+                }
+                return false; // if it passes the while loop there is no collision
+        }
+
+
+	// Check for a lower side collison, returns true if there is a collision, false otherwise
+	method boolean lowCollision() {
+    		var int gridX, gridY, nextRow; // tetromino position relative to the window not the screen
+    		var int row, col, i;
+    		var Array grid;
+    		let gridX = (tetromino.getX() - wx) / 12; // Use BLOCK_SIZE
+  	  	let gridY = (tetromino.getY() - wy) / 12; // Use BLOCK_SIZE
+    		let grid = tetromino.getGrid();
+
+    		let i = 0;
+    		while (i < 16) { // Iterate through all 16 cells of the tetromino's 4x4 grid
+        		if (grid[i] = 1) { // If this cell of the tetromino is filled
+            			let row = gridY + (i / 4);     // Current row in windowGrid
+            			let col = gridX + mod(i, 4); // Current col in windowGrid
+
+            			// Check the cell directly below the current tetromino block
+            			let nextRow = row + 1;
+
+	            		// Collision with the floor of the game window
+       		     		if (nextRow > 19) { // Assuming 20 rows in your window grid (0-19)
+					do addScore(1);
+                			return true;
+            			}
+
+            			// Collision with an existing block in the windowGrid
+          	  			if (windowGrid[nextRow * 10 + col] = 1) { // Check the cell directly below
+					do addScore(1);
+               		 		return true;
+            			}
+        		}
+        		let i = i + 1;
+    		}
+    		return false;
+	}
+
+	method boolean rotCollision() {
+    		var int i, row, col;
+    		var int gridX, gridY;
+    		var Array rotGrid;
+
+	    	let rotGrid = tetromino.getRotatedGrid();
+    		let gridX = (tetromino.getX() - wx) / 12;
+		let gridY = (tetromino.getY() - wy) / 12;
+    		let i = 0;
+
+    		while (i < 16) {
+        		if (rotGrid[i] = 1) {
+            			let row = gridY + (i / 4);
+            			let col = gridX + mod(i, 4);
+            			if (col < 0 | col > 9 ) {
+                			return true;
+            			}
+				if (row < 0 | row > 19) {
+					return true;
+				}
+				if (windowGrid[row * 10 + col] = 1) {
+					return true;
+				}
+			}
+			let i = i + 1;
+		}
+    		return false;
+	}
+
+	// Score Adds to the current score
+	method void addScore(int type){
+		if (type = 1) {
+			let score = score + 4;
+		}
+		if (type = 2) {
+			let score = score + 40;
+		}
+		return;
+	}
+
+	// Swep Check if a row is complete, if it is remove it, lower every row above
+	method boolean sweep() {
+		var int row, counter, col, ur, uc, current, upper;
+		var boolean sweep;
+		let row = 0;
+		let sweep = false;
+		while (row < 20) {
+			let col = 0;
+			let counter = 0;
+			while (col < 10) {
+				if (windowGrid[row * 10 + col] = 1) {
+					let counter = counter + 1;
+				}
+				let col = col +1;
+			}
+			if (counter = 10) {
+				let sweep = true;
+				do addScore(2);
+				// Shift the blocks down
+				let ur = row;
+				while (ur > 0) {
+					let uc = 0;
+					while (uc < 10) {
+						// The current block is swapped for the block above
+						let current = ur * 10 + uc;
+						let upper = (ur - 1) * 10 + uc;
+						let windowGrid[current] = windowGrid[upper];
+						let uc = uc + 1;
+					}
+					let ur = ur - 1;
+				}
+
+			}
+			let row = row + 1;
+		}
+
+		return sweep;
+	}
+
+	// Draw the board (all the static elements of the game)
+	method void drawStatic() {
+		var int i, column, row, x1, x2, y1, y2;
+		let i = 0;
+		// Display the score
+		do Output.moveCursor(5, 18);
+		do Output.printString("SCORE: ");
+		do Output.moveCursor(5, 27);
+		do Output.printInt(score);
+		
+		// Display the window
+		// Draw white outer border
+		do Screen.setColor(true); // true = white
+		do Screen.drawRectangle(wx - 2, wy - 2, wx + 120 + 1, wy + 240 + 1);
+		// Draw black inner rectangle (actual game area)
+		do Screen.setColor(false); // false = black
+		do Screen.drawRectangle(wx, wy, wx + 119, wy + 239);
+
+		// Iterate through the windowGrid and draw the static blocks that are filled
+		while (i < 200) {
+			if (windowGrid[i] = 1) {
+				// Get the coordinates of that point in the grid
+				let row = i/10;
+				let column = mod(i, 10);
+				// Draw a 12 pixel block in those coordinates
+				let x1 = wx + (column * 12);
+				let y1 = wy + (row * 12);
+				let x2 = x1 + 11;
+				let y2 = y1 + 11;
+				do Screen.setColor(true);
+				do Screen.drawRectangle(x1, y1, x2, y2);
+			}
+			let i = i + 1;
+		}
+		return;
+	}
+
+	method void drawNextTetromino() {
+    		var Tetromino preview;
+    		do Screen.setColor(false);
+    		do Screen.drawRectangle(160, 100, 208, 148); // Clear preview area
+    		let preview = Tetromino.new(160, 100, nextType);
+    		do preview.draw();
+    		do preview.dispose();
+    		return;
+	}
+
+	method boolean askPlayAgain() {
+    		var char key;
+    		do Output.moveCursor(14, 18);
+    		do Output.printString("Press 'r' to replay, 'q' to quit");
+    		// Wait for key press
+    		while (true) {
+       			let key = Keyboard.keyPressed();
+        		if (key = 114) { // 'r'
+            		return true;
+        		}
+        		if (key = 113) { // 'q'
+            		return false;
+        		}
+    		}
+    		return false;
+	}
+
+	// Run the game
+	method void run() {
+    		var char key;
+    		var boolean collision, sweep, landed, playing, exit;
+  		var int gridX, gridY, i, row, col, index;
+    		var Array grid;
+
+    		let playing = true;
+
+    		while (playing) {
+        		// Initialize state for this match
+        		let maxh = 0;
+        		let score = 0;
+
+        		// Clear board before a match starts
+        		let i = 0;
+        		while (i < 200) {
+            			let windowGrid[i] = 0;
+            			let i = i + 1;
+        		}
+
+        		do drawStatic();
+        		do Random.setSeed(seed);
+       			let seed = seed + 1;
+
+        		let exit = false;
+        		while (~exit & maxh < 19) {
+            			// Display title and next label
+            			do Output.moveCursor(2, 18);
+            			do Output.printString("TETRIS");
+            			do Output.moveCursor(7, 18);
+            			do Output.printString("NEXT: ");
+
+            			// Spawn tetromino and next preview
+            			let tetromino = Tetromino.new(58, 0, nextType);
+            			let nextType = Random.randRange(6);
+            			do drawNextTetromino();
+            			do tetromino.draw();
+
+            			let landed = lowCollision();
+
+            			// Fall loop
+            			while (landed = false) {
+                			let key = Keyboard.keyPressed();
+
+                			if (key = 113) { // 'q' key
+                    				let exit = true;
+                			}
+
+                			if (key = 130) {
+                    				let collision = leftCollision();
+                    				if (collision = false) {
+                        				do tetromino.moveLeft();
+                    				}
+                			}
+
+                			if (key = 132) {
+                    				let collision = rightCollision();
+                    				if (collision = false) {
+                        				do tetromino.moveRight();
+                    				}
+                			}
+
+                			if (key = 131) {
+                    				let collision = rotCollision();
+                    				if (collision = false) {
+                        				do tetromino.rotate();
+                    				}
+                			}
+
+                			let landed = lowCollision();
+                			if (landed = false) {
+                    				do tetromino.moveDown();
+                			}
+
+                			do Sys.wait(120); // controlls the speed
+            			}
+
+            			// When landed, merge with window grid
+            			if (landed = true) {
+                			let gridX = (tetromino.getX() - wx) / 12;
+                			let gridY = (tetromino.getY() - wy) / 12;
+                			let i = 0;
+                			let grid = tetromino.getGrid();
+
+                			while (i < 16) {
+                    				if (grid[i] = 1) {
+                        				let row = gridY + (i / 4);
+                        				let col = gridX + mod(i, 4);
+
+                        				if (row > -1 & row < 20 & col > -1 & col < 10) {
+                            					let index = row * 10 + col;
+                           	 				let windowGrid[index] = 1;
+
+                            					if ((19 - row) > maxh) {
+                                					let maxh = 19 - row;
+                            					}
+                        				}
+                    				}
+                    				let i = i + 1;
+                			}
+
+                			do drawStatic();
+                			do tetromino.dispose();
+
+                			let sweep = sweep();
+                			if (sweep = true) {
+                    				do drawStatic();
+                			}
+            			}
+        		}
+
+        		// Match is over — clear board and show game over
+        		let i = 0;
+        		while (i < 200) {
+            			let windowGrid[i] = 0;
+            			let i = i + 1;
+        		}
+        		do drawStatic();
+
+        		do Output.moveCursor(10, 2);
+        		do Output.printString("--GAME OVER--");
+
+        		if (askPlayAgain()) {
+				do Screen.setColor(false);
+				do Screen.drawRectangle(140, 148, 400, 200);
+            			let playing = true; // will rerun loop
+        		}
+			else {
+            			let playing = false;
+        			do Screen.setColor(false);
+            			do Screen.drawRectangle(0, 0, 500, 256);
+            			do Output.moveCursor(10, 27);
+            			do Output.printString("GOOD BYE!");
+        		}
+    		}
+    		return;
+	}
+
+
+}

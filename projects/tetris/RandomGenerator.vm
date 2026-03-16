@@ -1,0 +1,61 @@
+function RandomGenerator.setSeed 0
+    push argument 0
+    pop static 0
+    push constant 0
+    return
+function RandomGenerator.rand 0
+    push static 0
+    push constant 20251
+    add
+    pop static 0
+    push static 0
+    push constant 0
+    lt
+    not
+    if-goto RandomGenerator_1
+    push static 0
+    push constant 32767
+    sub
+    push constant 1
+    sub
+    pop static 0
+    goto RandomGenerator_0
+label RandomGenerator_1
+label RandomGenerator_0
+    push static 0
+    return
+function RandomGenerator.randRange 2
+    push constant 1
+    pop local 0
+label RandomGenerator_2
+    push local 0
+    push argument 0
+    lt
+    not
+    if-goto RandomGenerator_3
+    push local 0
+    push constant 2
+    call Math.multiply 2
+    push constant 1
+    add
+    pop local 0
+    goto RandomGenerator_2
+label RandomGenerator_3
+    call RandomGenerator.rand 0
+    push local 0
+    and
+    pop local 1
+label RandomGenerator_4
+    push local 1
+    push argument 0
+    gt
+    not
+    if-goto RandomGenerator_5
+    call RandomGenerator.rand 0
+    push local 0
+    and
+    pop local 1
+    goto RandomGenerator_4
+label RandomGenerator_5
+    push local 1
+    return

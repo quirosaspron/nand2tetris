@@ -1,0 +1,415 @@
+// Tetronimo representes a graphical tetromino object
+
+class Tetromino {
+	field int x, y; // (x, y) position of grid in the screen
+	field int wx, wy; // (wx, wy) position of window in the screen
+	field int tetrominoType;
+	field Array grid;
+	// Consturctor Create a random tetromino object
+	constructor Tetromino new(int px, int py, int type){
+		let wx = 10;
+		let wy = 10;
+		let x = px;
+		let y = py;
+		let grid = Array.new(16);
+        	let tetrominoType = type;
+		if (tetrominoType = 0){
+			let grid[0] = 0;
+			let grid[1] = 0;
+			let grid[2] = 0;
+			let grid[3] = 0;
+			let grid[4] = 0;
+			let grid[5] = 0;
+			let grid[6] = 1;
+			let grid[7] = 1;
+			let grid[8] = 0;
+			let grid[9] = 0;
+			let grid[10] = 1;
+			let grid[11] = 1;
+			let grid[12] = 0;
+			let grid[13] = 0;
+			let grid[14] = 0;
+			let grid[15] = 0;
+		}
+
+		if (tetrominoType = 1){
+			let grid[0] = 0;
+			let grid[1] = 0;
+			let grid[2] = 0;
+			let grid[3] = 0;
+			let grid[4] = 1;
+			let grid[5] = 1;
+			let grid[6] = 1;
+			let grid[7] = 1;
+			let grid[8] = 0;
+			let grid[9] = 0;
+			let grid[10] = 0;
+			let grid[11] = 0;
+			let grid[12] = 0;
+			let grid[13] = 0;
+			let grid[14] = 0;
+			let grid[15] = 0;
+		}
+
+	 	if (tetrominoType = 2){
+			let grid[0] = 0;
+			let grid[1] = 0;
+			let grid[2] = 0;
+			let grid[3] = 0;
+			let grid[4] = 0;
+			let grid[5] = 1;
+			let grid[6] = 1;
+			let grid[7] = 0;
+			let grid[8] = 1;
+			let grid[9] = 1;
+			let grid[10] = 0;
+			let grid[11] = 0;
+			let grid[12] = 0;
+			let grid[13] = 0;
+			let grid[14] = 0;
+			let grid[15] = 0;
+		}
+	 	if (tetrominoType = 3){
+			let grid[0] = 0;
+			let grid[1] = 0;
+			let grid[2] = 0;
+			let grid[3] = 0;
+			let grid[4] = 1;
+			let grid[5] = 1;
+			let grid[6] = 0;
+			let grid[7] = 0;
+			let grid[8] = 0;
+			let grid[9] = 1;
+			let grid[10] = 1;
+			let grid[11] = 0;
+			let grid[12] = 0;
+			let grid[13] = 0;
+			let grid[14] = 0;
+			let grid[15] = 0;
+		}
+		if (tetrominoType = 4){
+			let grid[0] = 0;
+			let grid[1] = 0;
+			let grid[2] = 0;
+			let grid[3] = 0;
+			let grid[4] = 1;
+			let grid[5] = 1;
+			let grid[6] = 1;
+			let grid[7] = 0;
+			let grid[8] = 1;
+			let grid[9] = 0;
+			let grid[10] = 0;
+			let grid[11] = 0;
+			let grid[12] = 0;
+			let grid[13] = 0;
+			let grid[14] = 0;
+			let grid[15] = 0;
+		}
+	 	if (tetrominoType = 5){
+			let grid[0] = 0;
+			let grid[1] = 0;
+			let grid[2] = 0;
+			let grid[3] = 0;
+			let grid[4] = 1;
+			let grid[5] = 0;
+			let grid[6] = 0;
+			let grid[7] = 0;
+			let grid[8] = 1;
+			let grid[9] = 1;
+			let grid[10] = 1;
+			let grid[11] = 0;
+			let grid[12] = 0;
+			let grid[13] = 0;
+			let grid[14] = 0;
+			let grid[15] = 0;
+		}
+		if (tetrominoType = 6){
+			let grid[0] = 0;
+			let grid[1] = 0;
+			let grid[2] = 0;
+			let grid[3] = 0;
+			let grid[4] = 0;
+			let grid[5] = 1;
+			let grid[6] = 0;
+			let grid[7] = 0;
+			let grid[8] = 1;
+			let grid[9] = 1;
+			let grid[10] = 1;
+			let grid[11] = 0;
+			let grid[12] = 0;
+			let grid[13] = 0;
+			let grid[14] = 0;
+			let grid[15] = 0;
+		}
+		return this;
+	}
+
+	method int getX() {
+    		return x;
+	}
+
+	method int getY() {
+    		return y;
+	}
+
+	method Array getGrid() {
+		return grid;
+	}
+
+
+	// dispose Dispose the tetromino object
+	method void dispose(){
+		do Memory.deAlloc(this);
+		return;
+	}
+
+	// draw Draws the tetromino in it's current position
+	method void draw() {
+		// Iterate over the grid and for each 1 encountered draw a 12 pixel block
+		var int i, row, column, x1, y1, x2, y2;
+		let i = 0;
+		while (i < 16){
+			if (grid[i] = 1){
+                                if (i = 0) {
+                                        let x1 = x + (0 * 12);
+                                        let y1 = y + (0 * 12);
+                                }
+                                if (i = 1) {
+                                        let x1 = x + (1 * 12);
+                                        let y1 = y + (0 * 12);
+                                }
+                                if (i = 2) {
+                                        let x1 = x + (2 * 12);
+                                        let y1 = y + (0 * 12);
+                                }
+                                if (i = 3) {
+                                        let x1 = x + (3 * 12);
+                                        let y1 = y + (0 * 12);
+                                }
+                                if (i = 4) {
+                                        let x1 = x + (0 * 12);
+                                        let y1 = y + (1 * 12);
+                                }
+                                if (i = 5) {
+                                        let x1 = x + (1 * 12);
+                                        let y1 = y + (1 * 12);
+                                }
+                                if (i = 6) {
+                                        let x1 = x + (2 * 12);
+                                        let y1 = y + (1 * 12);
+                                }
+                                if (i = 7) {
+                                        let x1 = x + (3 * 12);
+                                        let y1 = y + (1 * 12);
+                                }
+                                if (i = 8) {
+                                        let x1 = x + (0 * 12);
+                                        let y1 = y + (2 * 12);
+                                }
+                                if (i = 9) {
+                                        let x1 = x + (1 * 12);
+                                        let y1 = y + (2 * 12);
+                                }
+                                if (i = 10) {
+                                        let x1 = x + (2 * 12);
+                                        let y1 = y + (2 * 12);
+                                }
+                                if (i = 11) {
+                                        let x1 = x + (3 * 12);
+                                        let y1 = y + (2 * 12);
+                                }
+                                if (i = 12) {
+                                        let x1 = x + (0 * 12);
+                                        let y1 = y + (3 * 12);
+                                }
+                                if (i = 13) {
+                                        let x1 = x + (1 * 12);
+                                        let y1 = y + (3 * 12);
+                                }
+                                if (i = 14) {
+                                        let x1 = x + (2 * 12);
+                                        let y1 = y + (3 * 12);
+                                }
+                                if (i = 15) {
+                                        let x1 = x + (3 * 12);
+                                        let y1 = y + (3 * 12);
+                                }
+				let x2 = x1 + 11;
+				let y2 = y1 + 11;
+				do Screen.setColor(true);
+				do Screen.drawRectangle(x1, y1, x2, y2);
+			}
+			let i = i + 1;
+		}
+		return;
+	}
+	// erase Erases the tetromino
+	method void erase(){
+                // Iterate over the grid and for each 1 encountered erase a 12 pixel block
+                var int i, row, column, x1, y1, x2, y2;
+                let i = 0;
+                while (i < 16){
+                        if (grid[i] = 1){
+				if (i = 0) {
+                			let x1 = x + (0 * 12);
+					let y1 = y + (0 * 12);
+            			}
+				if (i = 1) {
+                			let x1 = x + (1 * 12); 
+					let y1 = y + (0 * 12);
+            			} 
+				if (i = 2) {
+                			let x1 = x + (2 * 12);
+					let y1 = y + (0 * 12);
+            			}
+				if (i = 3) {
+                			let x1 = x + (3 * 12); 
+					let y1 = y + (0 * 12);
+            			}
+				if (i = 4) {
+                			let x1 = x + (0 * 12); 
+					let y1 = y + (1 * 12);
+            			}
+				if (i = 5) {
+       		         		let x1 = x + (1 * 12);
+					let y1 = y + (1 * 12);
+            			}
+				if (i = 6) {
+               		 		let x1 = x + (2 * 12);
+					let y1 = y + (1 * 12);
+        	    		}
+				if (i = 7) {
+                			let x1 = x + (3 * 12);
+					let y1 = y + (1 * 12);
+            			} 
+				if (i = 8) {
+                			let x1 = x + (0 * 12); 
+					let y1 = y + (2 * 12);
+            			}
+				if (i = 9) {
+                			let x1 = x + (1 * 12);
+					let y1 = y + (2 * 12);
+            			}
+				if (i = 10) {
+                			let x1 = x + (2 * 12);
+					let y1 = y + (2 * 12);
+            			}
+				if (i = 11) {
+                			let x1 = x + (3 * 12);
+					let y1 = y + (2 * 12);
+            			} 
+				if (i = 12) {
+               		 		let x1 = x + (0 * 12);
+					let y1 = y + (3 * 12);
+            			}	 
+				if (i = 13) {
+               		 		let x1 = x + (1 * 12); 
+					let y1 = y + (3 * 12);
+            			} 
+				if (i = 14) {
+               		 		let x1 = x + (2 * 12);
+					let y1 = y + (3 * 12);
+            			} 
+				if (i = 15) {
+                			let x1 = x + (3 * 12);
+					let y1 = y + (3 * 12);
+            			}
+				let x2 = x1 + 11;
+				let y2 = y1 + 11;
+				do Screen.setColor(false);
+                                do Screen.drawRectangle(x1, y1, x2, y2);
+                        }
+			let i = i + 1;
+                }
+                return;
+        }
+
+
+	// moveLeft Moves the tetromino one block to the left, collision detection in Tetris class
+	method void moveLeft(){
+		do erase();
+		let x = x - 12;
+		do draw();
+		return;
+	}
+
+	// moveRight Moves the tetromino one block to the right
+	method void moveRight(){
+		do erase();
+                let x = x + 12;
+                do draw();
+                return;
+        }
+
+	// rotate Rotate the tetromino by 90 dregrees clockwise
+	method void rotate() {
+		var int t0, t1, t2, t3, t5, t6, t7, t11;
+		do erase();	
+		let t0 = grid[0];
+		let t1 = grid[1];
+		let t2 = grid[2];
+		let t3 = grid[3];
+		let t5 = grid[5];
+		let t6 = grid[6];
+		let t7 = grid[7];
+		let t11 = grid[11];
+		let grid[0] = grid[12];
+		let grid[1] = grid[8];
+		let grid[2] = grid[4];
+		let grid[3] = t0;
+		let grid[4] = grid[13];
+		let grid[5] = grid[9];
+		let grid[6] = t5;
+		let grid[7] = t1;
+		let grid[8] = grid[14];
+		let grid[9] = grid[10];
+		let grid[10] = t6;
+		let grid[11] = t2;
+		let grid[12] = grid[15];
+		let grid[13] = t11;
+		let grid[14] = t7;
+		let grid[15] = t3;
+		do draw();
+		return;
+	}
+
+	// Method to get the rotated grid in advanced to check if it is possible
+	method Array getRotatedGrid() {
+		var Array Rgrid;
+                var int t0, t1, t2, t3, t5, t6, t7, t11;
+		let Rgrid = Array.new(16);
+                let t0 = grid[0];
+                let t1 = grid[1];
+                let t2 = grid[2];
+                let t3 = grid[3];
+                let t5 = grid[5];
+                let t6 = grid[6];
+                let t7 = grid[7];
+                let t11 = grid[11];
+                let Rgrid[0] = grid[12];
+                let Rgrid[1] = grid[8];
+                let Rgrid[2] = grid[4];
+                let Rgrid[3] = t0;
+                let Rgrid[4] = grid[13];
+                let Rgrid[5] = grid[9];
+                let Rgrid[6] = t5;
+                let Rgrid[7] = t1;
+                let Rgrid[8] = grid[14];
+                let Rgrid[9] = grid[10];
+                let Rgrid[10] = t6;
+                let Rgrid[11] = t2;
+                let Rgrid[12] = grid[15];
+                let Rgrid[13] = t11;
+                let Rgrid[14] = t7;
+                let Rgrid[15] = t3;
+                return Rgrid;
+	}
+
+	// moveDown Moves the tetromino one block down
+	method void moveDown(){
+		do erase();
+                let y = y + 12;
+                do draw();
+                return;
+        }
+}

@@ -1,0 +1,69 @@
+// In Tetris.jack Replace your current run() method with this to make things smoother:
+    method void run() {
+        var char key;
+        var boolean collision, sweep, landed, playing, exit;
+        var int gridX, gridY, i, row, col, index;
+        var Array grid;
+        
+        // NEW: Variables for smooth timing
+        var int gravityTimer; 
+        var int gravityThreshold; 
+
+        let playing = true;
+
+        while (playing) {
+            // ... (Your existing board clearing / setup code is fine here) ...
+            
+            // Initialize gravity settings
+            let gravityTimer = 0;
+            let gravityThreshold = 20; // Falling speed (Higher = Slower)
+            
+            // ... (Your spawn logic) ...
+            
+            // --- THE NEW LOOP ---
+            while (landed = false) {
+                let key = Keyboard.keyPressed();
+
+                if (key = 113) { let exit = true; } // q
+
+                // LATERAL MOVEMENT (Checked every frame = Smooth/Fast response)
+                // Note: We check key != 0 to ensure we don't spam if no key is pressed
+                if (~(key = 0)) {
+                    if (key = 130) { // Left
+                        let collision = leftCollision();
+                        if (collision = false) { do tetromino.moveLeft(); }
+                    }
+                    if (key = 132) { // Right
+                        let collision = rightCollision();
+                        if (collision = false) { do tetromino.moveRight(); }
+                    }
+                    if (key = 131) { // Up (Rotate)
+                        let collision = rotCollision();
+                        if (collision = false) { do tetromino.rotate(); }
+                    }
+                    
+                    // CRITICAL: Small wait after input to prevent "teleporting"
+                    // because the loop is now very fast.
+                    do Sys.wait(50); 
+                }
+
+                // GRAVITY LOGIC (Only runs when timer fills up)
+                let gravityTimer = gravityTimer + 1;
+                
+                if (gravityTimer > gravityThreshold) {
+                    let gravityTimer = 0; // Reset timer
+                    
+                    let landed = lowCollision();
+                    if (landed = false) {
+                        do tetromino.moveDown();
+                    }
+                }
+
+                // Short wait allows high frame rate
+                do Sys.wait(10); 
+            }
+            
+            // ... (Rest of your landing / game over logic) ...
+        }
+        return;
+    }
