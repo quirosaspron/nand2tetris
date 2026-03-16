@@ -1,0 +1,85 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/12/Memory.jack
+
+/**
+ * This library provides two services: direct access to the computer's main
+ * memory (RAM), and allocation and recycling of memory blocks. The Hack RAM
+ * consists of 32,768 words, each holding a 16-bit binary number.
+ */ 
+class Memory {
+
+    static Array ram, heap, freeList;
+
+    /** Initializes the class. */
+    function void init() {
+	let ram = 0;
+	let heap = 2048;
+	let freeList = heap;
+	let heap[0] = 0;
+	let heap[1] = 14334;
+    	return;	
+    }
+
+    /** Returns the RAM value at the given address. */
+    function int peek(int address) {
+		return (ram[address]);
+    }
+
+    /** Sets the RAM value at the given address to the given value. */
+    function void poke(int address, int value) {
+		let ram[address] = value;
+		return;
+    }
+
+    /** Finds an available RAM block of the given size and returns
+     *  a reference to its base address. */
+    function Array alloc(int size) {
+	var int block, prevBlock, prevSize, prevNext, nextBlock;
+	let prevBlock = 0;
+	let block = freeList;
+	while (~(block = 0)){
+		if (~(block[1] < (size + 2))) {
+    			// Determine if splitting is actually worth it
+    			if (block[1] > (size + 5)) { // Threshold: only split if leftover > 3
+        			let nextBlock = block + size + 2;
+        			let nextBlock[0] = block[0];
+        			let nextBlock[1] = block[1] - size - 2;
+        			let block[1] = size;
+       	 			if (block = freeList) {
+            				let freeList = nextBlock;
+        			}
+				else {
+            				let prevBlock[0] = nextBlock;
+        			}
+    			}
+			else {
+        			// Not enough room to split! Give the whole block to the user.
+        			if (block = freeList) {
+            				let freeList = block[0];
+        			}
+				else {
+            				let prevBlock[0] = block[0];
+        			}
+    			}
+    			return block + 2;
+		}
+			let prevBlock = block; 
+			let block = block[0];
+	}
+	return 0;
+    }
+
+    /** De-allocates the given object (cast as an array) by making
+     *  it available for future allocations. */
+    function void deAlloc(Array object) {
+    	var int segment;
+    	// Find the header (2 words before the object)
+    	let segment = object - 2;
+    	// Add this segment to the front of the freeList
+    	let segment[0] = freeList; 
+    	let freeList = segment;
+    	return;
+    }
+}
